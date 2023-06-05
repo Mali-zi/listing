@@ -3,11 +3,14 @@ import etsy from './etsy.json';
 import Listing from './components/Listing';
 
 type Item = {
-  url: string,
-  title: string,
-  price: string,
-  quantity: number,
-  MainImage?: MainImage
+  listing_id: number,
+  url?: string,
+  title?: string,
+  price?: string,
+  quantity?: number,
+  MainImage?: MainImage,
+  currency_code?: string,
+
 };
 
 type MainImage = {
@@ -34,18 +37,24 @@ type MainImage = {
 function App() {
   let items = JSON.parse(JSON.stringify(etsy));
   const listItem = items.map((item: Item) => {
-    return (
-      <Listing 
-        url={item.url}
-        title={item.title}
-        price={item.price}
-        quantity={item.quantity}
-        mainImage={item.MainImage ? item.MainImage.url_570xN : "https://img1.etsystatic.com/156/0/12814579/il_570xN.1173240751_50hv.jpg"}
-      />
-    )
+    if (item.url && item.title && item.price && item.quantity && item.currency_code && item.MainImage) {
+      return (
+        <Listing 
+          key={item.listing_id}
+          url={item.url}
+          title={item.title}
+          price={item.price}
+          quantity={item.quantity}
+          currency_code={item.currency_code}
+          mainImage={item.MainImage.url_570xN}
+        />
+      )
+    } else {
+      return <></>
+    };    
   });
   return (
-    <div>
+    <div className="item-list">
       {listItem}
     </div>
   );
