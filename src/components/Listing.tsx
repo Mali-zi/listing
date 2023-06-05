@@ -1,3 +1,5 @@
+import Price from "./Price";
+
 type Data = {
   url: string;
   title: string;
@@ -17,7 +19,10 @@ function Listing({ url, title, price, quantity, currency_code, mainImage}: Data)
       </div>
       <div className="item-details">
         <p className="item-title">{title}</p>
-        <p className="item-price">{price}</p>
+        <Price
+          price={price} 
+          currency_code={currency_code}
+        />
         <p className="item-quantity level-medium">{quantity} left</p>
       </div>
     </div>
