@@ -1,4 +1,6 @@
 import Price from "./Price";
+import Quantity from "./Quantity";
+import Title from "./Title";
 
 type Data = {
   url: string;
@@ -9,7 +11,7 @@ type Data = {
   mainImage: string;
 };
 
-function Listing({ url, title, price, quantity, currency_code, mainImage}: Data): JSX.Element {
+function Listing({ url, title, price, quantity, currency_code, mainImage }: Data): JSX.Element {
   return (
     <div className="item">
       <div className="item-image">
@@ -18,12 +20,12 @@ function Listing({ url, title, price, quantity, currency_code, mainImage}: Data)
         </a>
       </div>
       <div className="item-details">
-        <p className="item-title">{title}</p>
+        <Title title={title} />
         <Price
           price={price} 
           currency_code={currency_code}
         />
-        <p className="item-quantity level-medium">{quantity} left</p>
+        <Quantity quantity={quantity} />
       </div>
     </div>
   )
